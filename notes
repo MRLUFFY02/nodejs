@@ -1,0 +1,28 @@
+Javascript
+------------------
+Asynchronous 
+single thread--can do one action at a time
+Nodejs
+----------
+3 modules
+----------
+1.local modules
+2.core modules
+3.Third party module
+
+Why db?
+-----------
+data-store
+Ram-SD-HD
+
+Question?--Query --lang DB
+2 types 
+----------
+SQl Nosql
+
+MERN stack
+-----------
+Mongodb ----data store
+ExpressJS----api link create
+React---Frontend
+NodeJS---contains many frameworks--ExpressJS,nextJS....
