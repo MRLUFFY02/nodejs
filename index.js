@@ -5,7 +5,9 @@ import cors from 'cors'
 const app=express()
 
 
-// app.use(cors())
+app.use(cors())
+//body parser
+app.use(express.json())
 
 async function createConnection()
 {
@@ -33,11 +35,33 @@ app.get("/movies",async(request,response)=>{
 app.get("/movies/:id",async(request,response)=>{
     console.log(request.params)
     const {id}=request.params
-    const movie=await client.db("moviedb").collection("movies").findOne({id:id})
+    const movie=await client.db("moviedb").collection("movies").findOne({id})
     movie?response.send(movie):response.status(404).send({msg:"No such movie found"})
 
 })
 
+app.post("/movies",async(request,response)=>{
+    const data=request.body
+    console.log(data);
+    const result=await client.db("moviedb").collection("movies").insertOne(data)
+    response.send(result)
+})
+
+app.delete("/movies/:id",async(request,response)=>{
+    console.log(request.params)
+    const {id}=request.params
+    const movie=await client.db("moviedb").collection("movies").deleteOne({id})
+    movie?response.send(movie):response.status(404).send({msg:"No such movie found"})
+
+})
+
+app.put("/movies/:id",async(request,response)=>{
+    const data=request.body
+    console.log(request.params)
+    const {id}=request.params
+    const result=await client.db("moviedb").collection("movies").updateOne({id},{$set:data})
+    response.send(result)
+})
 //create server 
 app.listen(4000,()=>console.log('App started in port 4000'))
 
